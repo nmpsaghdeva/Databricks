@@ -36,3 +36,4 @@ steps:
   displayName: 'pytest'
 
 - script: python Create_token/create.py
+arguments: Key C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws 
