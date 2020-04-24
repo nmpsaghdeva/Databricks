@@ -20,7 +20,6 @@ strategy:
       python.version: '3.7'
 
 steps:
-steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.6'
