@@ -20,9 +20,10 @@ strategy:
       python.version: '3.7'
 
 steps:
+steps:
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '$(python.version)'
+    versionSpec: '3.6'
   displayName: 'Use Python $(python.version)'
 
 - script: |
@@ -34,3 +35,5 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- script: python Create_token/create.py
