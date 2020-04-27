@@ -21,11 +21,15 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-  displayName: 'Install dependencies'
-
-- script: |
     pip install pytest pytest-azurepipelines
     pip install-Package Azure.Identity
     pip install azure-keyvault-secrets
     pip install azure-keyvault-keys
-  displayName: 'pytest'
+  displayName: 'Install dependencies'
+
+- steps:
+- task: PythonScript@0
+  displayName: 'Run a Python script'
+  inputs:
+    scriptPath: '$(System.DefaultWorkingDirectory)/_Get_code_create_access_token/wrkfldr/wrkfldr/create.py'
+    arguments: 'Key C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws '
