@@ -28,5 +28,5 @@ steps:
   displayName: 'Install dependencies'
 
 - script: python Create_token/create.py
-    arguments: Token C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws
+    arguments:Token C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws
   displayName: 'Create'
