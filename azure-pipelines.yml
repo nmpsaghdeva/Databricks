@@ -10,12 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -27,13 +21,12 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r requirements.txt
+    pip install pytest pytest-azurepipelines
+    pip install-Package Azure.Identity
+    pip install azure-keyvault-secrets
+    pip install azure-keyvault-keys
   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
-
 - script: python Create_token/create.py
-arguments: Key C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws 
+    arguments: Token C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws
+  displayName: 'Create'
