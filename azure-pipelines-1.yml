@@ -33,10 +33,3 @@ steps:
     pip install azure-keyvault-keys
     pytest
   displayName: 'pytest'
-
-  steps:
-- task: PythonScript@0
-  displayName: 'Run a Python script'
-  inputs:
-    scriptPath: '$(System.DefaultWorkingDirectory)/_Get_code_create_access_token/wrkfldr/wrkfldr/create.py'
-    arguments: 'Key C mynewacesstok centralus.azuredatabricks.net kv-eds-databricks Accesstokdkstest-ws '
