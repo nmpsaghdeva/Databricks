@@ -28,5 +28,4 @@ steps:
     pip install-Package Azure.Identity
     pip install azure-keyvault-secrets
     pip install azure-keyvault-keys
-    pytest
   displayName: 'pytest'
