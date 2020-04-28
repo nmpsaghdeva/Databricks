@@ -7,6 +7,8 @@ import argparse
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from azure.keyvault.keys import KeyClient
+from azure.identity import ClientSecretCredential
+
 
 # This program is used to generate new token for databricks application. It accepts following parameters 
 
@@ -109,15 +111,21 @@ def create_secret(new_token_value):
     return("New Secret created %s" % secret.name);
 
 def make_connection():
-    credential = DefaultAzureCredential()
-    v_url = "https://" + KeyVault + ".vault.azure.net/"
+    tenant_id = "bc111fcd-1154-4322-b437-799c66a7677c"
+    client_id = "4ae3d5ed-bbd0-485d-956b-19c0378940a2"
+    client_secret = "Rm/?G6GnHsyA?rx=q5xmOATw1gi6N]HB"
+    credential = ClientSecretCredential(tenant_id, client_id, client_secret)
+    client = KeyClient("https://MasterDataBricksKeyVault.vault.azure.net", credential)
+    return client ;
+    #credential = DefaultAzureCredential()
+    #v_url = "https://" + KeyVault + ".vault.azure.net/"
     #key_client = KeyClient(vault_url="https://MasterDataBricksKeyVault.vault.azure.net/", credential=credential)
-    if ENTITYTYPE == 'Key': 
-       Key_client = KeyClient(vault_url= v_url, credential=credential)
-       return Key_client
-    else:
-       secret_client = SecretClient(vault_url=v_url, credential=credential)
-       return secret_client ;
+    #if ENTITYTYPE == 'Key': 
+       #Key_client = KeyClient(vault_url= v_url, credential=credential)
+       #return Key_client
+    #else:
+    #   secret_client = SecretClient(vault_url=v_url, credential=credential)
+    #   return secret_client ;
 
 def parse_argv():
     global ENTITYTYPE
