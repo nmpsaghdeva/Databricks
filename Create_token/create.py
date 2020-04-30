@@ -13,7 +13,7 @@ from azure.identity import ClientSecretCredential
 
 # This program is used to generate new token for databricks application. It accepts following parameters 
 
-DOMAIN = 'centralus.azuredatabricks.net'
+DOMAIN = ''
 TOKEN = ''
 VAR_COMMENTS = ""
 ENTITYTYPE = ""
@@ -114,9 +114,6 @@ def create_secret(new_token_value):
 
 def make_connection():  
     global KeyVault
-    tenant_id = "bc111fcd-1154-4322-b437-799c66a7677c"
-    client_id = "4ae3d5ed-bbd0-485d-956b-19c0378940a2"
-    client_secret = "Rm/?G6GnHsyA?rx=q5xmOATw1gi6N]HB"
     credential = ClientSecretCredential(tenant_id, client_id, client_secret)
     v_url = "https://" + KeyVault + ".vault.azure.net/"
     #key_client = KeyClient(vault_url="https://MasterDataBricksKeyVault.vault.azure.net/", credential=credential)
@@ -134,7 +131,10 @@ def parse_argv():
     global EntityName
     global DOMAIN 
     global KeyVault
-    global MasterKeySecret 
+    global MasterKeySecret
+    global tenant_id
+    global client_id
+    global client_secret
 
     list = ['C','R','U']
     et = ['Key','Secret','Token']
@@ -148,6 +148,9 @@ def parse_argv():
     parser.add_argument('Domain',help='Enter Name of the Domain')
     parser.add_argument('Keyvault',help='Enter Name of the Keyvault')
     parser.add_argument('MasterKeysecret',help='Enter Name of the Master secret')
+    parser.add_argument('tenant_id',help='Enter tenant_id ')
+    parser.add_argument('client_id',help='Enter client_id of the application')
+    parser.add_argument('client_secret',help='Enter client secret of the Application')
     args = parser.parse_args()
     if (args.Operation not in list):
          print('Valid values for Operation are C - Create, R - Retrieve, U - Update')
@@ -161,6 +164,9 @@ def parse_argv():
     DOMAIN = args.Domain
     KeyVault = args.Keyvault
     MasterKeySecret = args.MasterKeysecret
+    tenant_id = args.tenant_id
+    client_id = args.client_id
+    client_secret = args.client_secret
     return 0;
 
 def main():
