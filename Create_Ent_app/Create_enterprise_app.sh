@@ -5,6 +5,7 @@ then
   echo "Usage: $0 <Enter Name of the Application> <Application Admin Username> <Password> "
   exit
 fi
+
 rm -f ./para.json
 echo "{"  > ./para.json
 echo "\"displayName\": \"$1\"" >> ./para.json
