@@ -1,0 +1,107 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "value": "dmp-5766-dev-db1"
+        },
+        "vnetResourceGroup": {
+            "value": "networking-eastus2"
+        },
+        "location": {
+            "value": "eastus2"
+        },
+        "vnetName": {
+            "value": "krcdp_databricks_dmp_dev-eastus2-vnet"
+        },
+        "privateSubnetName": {
+            "value": "krcdp_databricks_dmp_dev-private"
+        },
+        "publicSubnetName": {
+            "value": "krcdp_databricks_dmp_dev-public"
+        },
+        "dataLakeStorageAccountName": {
+            "value": "dmp5766devdlstrg1"
+        },
+        "existingVirtualNetworkSubnets": {
+            "value": [
+                "krcdp_databricks_dmp_dev-public"
+            ]
+        },
+        "setStorageAccountVnetFirewallrules": {
+            "value": "true"
+        },
+        "setStorageAccountExternalIpFirewallrules": {
+            "value": "true"
+        },
+        "publicIpRules": {
+            "value": [
+                "158.48.0.0/16",
+                "74.202.243.160/28",
+                "67.216.16.80/28",
+                "166.130.31.171",
+                "12.40.75.128/27",
+                "67.96.18.160/27",
+                "67.96.20.64/27",
+                "216.195.66.40/29",
+                "216.195.66.48/28",
+                "8.28.56.0/24",
+                "207.67.106.244/30",
+                "139.180.242.113",
+                "139.180.244.123",
+                "139.180.246.231",
+                "13.52.159.53",
+                "35.183.193.137",
+                "35.181.40.231",
+                "3.9.5.71",
+                "63.35.148.30",
+                "18.153.61.119",
+                "18.229.31.78",
+                "3.104.209.77",
+                "13.234.105.78",
+                "15.164.43.79",
+                "3.1.178.30",
+                "3.112.89.71"
+            ]
+        },
+        "defaultStorageNetworkAction": {
+            "value": "Allow"
+        },
+        "keyVaultName": {
+            "value": "dmp-5766-dev-kv1"
+        },
+        "usertenantId": {
+            "value": "8331e14a-9134-4288-bf5a-5e2c8412f074"
+        },
+        "userobjectId": {
+            "value": "6c2fc3fa-6b2a-4750-8321-6967e77b1eb8"
+        },
+        "tags_databricks" : {
+            "value": {
+              "owner": "anderson_muse_at_kroger_com",
+              "cost-center": "9999",
+              "environment": "Dev",
+              "application-name": "DMP-datalake",
+              "spm-id": "5766"
+            }
+        },
+        "tags_dlstrg" : {
+            "value": {
+              "owner": "anderson_muse_at_kroger_com",
+              "cost-center": "9999",
+              "environment": "Dev",
+              "application-name": "DMP-datalake",
+              "spm-id": "5766"
+            }
+        },
+        "tags_kv" : {
+            "value": {
+              "owner": "anderson_muse_at_kroger_com",
+              "cost-center": "9999",
+              "environment": "Dev",
+              "application-name": "DMP-datalake",
+              "spm-id": "5766"
+            }
+        } 
+    }
+}

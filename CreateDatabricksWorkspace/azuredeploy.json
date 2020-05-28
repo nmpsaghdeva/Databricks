@@ -1,0 +1,392 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the virtual network to attach to databricks."
+            }
+        },
+        "vnetResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "the name of the resource group where the vnet to attach resides. (assumes same subscription)"
+            }
+        },
+        "workspaceName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Azure Databricks workspace to create."
+            }
+        },
+        "privateSubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the private subnet to create."
+            }
+        },
+        "publicSubnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the public subnet to create."
+            }
+        },
+        "pricingTier": {
+            "defaultValue": "premium",
+            "allowedValues": [
+                "trial",
+                "standard",
+                "premium"
+            ],
+            "type": "string",
+            "metadata": {
+                "description": "The pricing tier of databricks workspace."
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "dataLakeStorageAccountName":{
+            "type": "string",
+            "metadata":{
+                "description": "The Name of the data Lake storage account to create"
+            }
+        },
+        "storageAccountApiVersion": {
+            "defaultValue": "2019-06-01",
+            "type": "string",
+            "metadata": {
+                "description": "The API version of the storage account to create"
+            }
+        },
+        "storageAccountType": {
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS",
+                "Standard_RAGRS",
+                "Premium_LRS"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Storage Account Type"
+            }
+        },
+        "storageKind": {
+            "defaultValue": "StorageV2",
+            "allowedValues": [
+                "StorageV2",
+                "Storage"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "The the Kind of Storage account. Default value is StorageV2 for Azure Data lake storage "
+            }
+        },
+        "storageAccessTier": {
+            "defaultValue": "Hot",
+            "allowedValues": [
+                "Hot",
+                "Cool"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "The Access tier of the Storage Account, Default is Cool"
+            }
+        },
+        "defaultStorageNetworkAction": {
+            "defaultValue": "Deny",
+            "allowedValues": [
+                "Allow",
+                "Deny"
+            ],
+            "type": "String"
+        },
+         "setStorageAccountVnetFirewallrules": {
+            "defaultValue": "true",
+            "allowedValues": [
+                "true",
+                "false"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Enable storage account firewall for Vnet rules. Default is True"
+            }
+        },
+        "setStorageAccountExternalIpFirewallrules": {
+            "defaultValue": "true",
+            "allowedValues": [
+                "true",
+                "false"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Enable storage account firewall for external IP addresses. Default is true"
+            }
+        },
+         "advancedThreatProtectionEnabled": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Enable or disable Advanced Threat Protection for data lake stoarge"
+            }
+        },
+        "existingVirtualNetworkSubnets": {
+            "type": "Array",
+            "metadata": {
+                "description": "Array - Array of subnets on vnet that you have enabled the Microsoft.Storage Service Endpoint on"
+            }
+        },
+        "publicIpRules": {
+            "type": "Array",
+            "metadata": {
+                "description": "IP FW rules for Storage Account"
+            }
+        },
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the key vault to create"
+            }
+        },
+        "keyVaultSkuName": {
+            "type": "string",
+            "defaultValue": "Standard",
+            "allowedValues": [
+                "Standard",
+                "Premium"
+            ],
+            "metadata": {
+                "description": "Specifies whether the key vault is a standard vault or a premium vault."
+            }
+        },
+        "usertenantId": {
+            "type": "string",
+            "defaultValue": "[subscription().tenantId]",
+            "metadata": {
+                "description": "Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet."
+            }
+        },
+        "userobjectId": {
+            "type": "string",
+            "metadata": {
+                "description": "Specifies the object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets."
+            }
+        },
+        "tags_databricks": {
+            "type": "object",
+            "metadata": {
+                "description": "The tag details for the databricks resource"
+            }
+        },
+        "tags_dlstrg": {
+            "type": "object",
+            "metadata": {
+                "description": "The tag details for the data Lake storage gen2 resource"
+            }
+        }, 
+        "tags_kv": {
+            "type": "object",
+            "metadata": {
+                "description": "The tag details for the key vault resource"
+            }
+        } 
+    },
+    "variables": {
+        "vnetId": "[resourceId(parameters('vnetResourceGroup'), 'Microsoft.Network/VirtualNetworks', parameters('vnetName'))]",
+        "managedResourceGroupId": "[concat(subscription().id, '/resourceGroups/', variables('managedResourceGroupName'))]",
+        "managedResourceGroupName": "[concat('managedrg-', parameters('workspaceName'), '-', uniqueString(parameters('workspaceName'), resourceGroup().id))]",
+        "dataLakeStorageAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('dataLakeStorageAccountName'))]",
+        "copy": [
+            {
+                "name": "ipRules",
+                "count": "[length(parameters('publicIpRules'))]",
+                "input": {
+                    "value": "[parameters('publicIpRules')[copyIndex('ipRules')]]",
+                    "action": "Allow"
+                }
+            },
+            {
+                "name": "virtualNetworkRules",
+                "count": "[length(parameters('existingVirtualNetworkSubnets'))]",
+                "input": {
+                    "id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('vnetResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('vnetName'), '/subnets/' ,parameters('existingVirtualNetworkSubnets')[copyIndex('virtualNetworkRules')])]",
+                    "action": "Allow"
+                }
+            }
+        ],
+        "emptyArray": [],
+        "ipRulesArray": "[if(equals(parameters('setStorageAccountExternalIpFirewallrules'), 'true'), variables('ipRules'), variables('emptyArray'))]",
+        "vnetRulesArray": "[if(equals(parameters('setStorageAccountVnetFirewallrules'), 'true'), variables('virtualNetworkRules'), variables('emptyArray'))]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-04-01",
+            "type": "Microsoft.Databricks/workspaces",
+            "location": "[parameters('location')]",
+            "name": "[parameters('workspaceName')]",
+            "tags": "[parameters('tags_databricks')]",
+            "sku": {
+                "name": "[parameters('pricingTier')]"
+            },
+            "comments": "The resource group specified will be locked after deployment.",
+            "properties": {
+                "ManagedResourceGroupId": "[variables('managedResourceGroupId')]",
+                "parameters": {
+                    "customVirtualNetworkId": {
+                        "value": "[variables('vnetId')]"
+                    },
+                    "customPrivateSubnetName": {
+                        "value": "[parameters('privateSubnetName')]"
+                    },
+                    "customPublicSubnetName": {
+                        "value": "[parameters('publicSubnetName')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('dataLakeStorageAccountName')]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tags_dlstrg')]",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "kind": "[parameters('storageKind')]",
+            "properties": {
+                "encryption": {
+                    "keySource": "Microsoft.Storage",
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        },
+                        "file": {
+                            "enabled": true
+                        }
+                    }
+                },
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": "[variables('vnetRulesArray')]",
+                    "ipRules": "[variables('ipRulesArray')]",
+                    "defaultAction": "[parameters('defaultStorageNetworkAction')]"
+                },
+                "accessTier": "[parameters('storageAccessTier')]",
+                "isHnsEnabled": true,
+                "supportsHttpsTrafficOnly": true
+            },
+            "resources": [
+                {
+                    "condition": "[parameters('advancedThreatProtectionEnabled')]",
+                    "type": "providers/advancedThreatProtectionSettings",
+                    "name": "Microsoft.Security/current",
+                    "apiVersion": "2019-01-01",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Storage/storageAccounts/', parameters('dataLakeStorageAccountName'))]"
+                    ],
+                    "properties": {
+                        "isEnabled": true
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2016-10-01",
+            "name": "[parameters('keyVaultName')]", 
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tags_kv')]",
+            "properties": {
+                "enabledForDeployment": true,
+                "enabledForDiskEncryption": true,
+                "enabledForTemplateDeployment": true,
+                "tenantId": "[parameters('userTenantId')]",
+                "accessPolicies": [
+                    {
+                        "objectId": "[parameters('userObjectId')]",
+                        "tenantId": "[parameters('userTenantId')]",
+                        "permissions": {
+                            "keys": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore"
+                            ],
+                            "certificates": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Purge",
+                                "ManageContacts",
+                                "ManageIssuers",
+                                "GetIssuers",
+                                "ListIssuers",
+                                "SetIssuers",
+                                "DeleteIssuers"
+                            ]
+                        }
+                    }
+                ],
+                "sku": {
+                  "name": "[parameters('keyVaultSkuName')]",
+                  "family": "A"
+                },
+                "networkAcls": {
+                  "defaultAction": "Allow",
+                  "bypass": "AzureServices",
+                  "ipRules": [],
+                  "virtualNetworkRules": []
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "name": "[concat(parameters('keyVaultName'), '/dlstrgconstr')]",
+            "apiVersion": "2016-10-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+                "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('dataLakeStorageAccountName'), ';AccountKey=', listKeys(variables('dataLakeStorageAccountResourceId'), parameters('storageAccountApiVersion')).keys[0].value, ';EndpointSuffix=core.windows.net')]"
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "name": "[concat(parameters('keyVaultName'), '/dlstrgprikey')]",
+            "apiVersion": "2016-10-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+                "value": "[concat(listKeys(variables('dataLakeStorageAccountResourceId'), parameters('storageAccountApiVersion')).keys[0].value)]"
+            }
+        }            
+    ]
+}
