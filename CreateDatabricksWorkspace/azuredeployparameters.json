@@ -3,29 +3,29 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "workspaceName": {
-            "value": "dmp-5766-dev-db1"
+            "value": "Databricks_ws_pipeline"
         },
         "vnetResourceGroup": {
-            "value": "networking-eastus2"
+            "value": "Databricks_onVnet"
         },
         "location": {
-            "value": "eastus2"
+            "value": "Central India"
         },
         "vnetName": {
-            "value": "krcdp_databricks_dmp_dev-eastus2-vnet"
+            "value": "Virtual_network"
         },
         "privateSubnetName": {
-            "value": "krcdp_databricks_dmp_dev-private"
+            "value": "Vnet_databricks_dmp_dev-private"
         },
         "publicSubnetName": {
-            "value": "krcdp_databricks_dmp_dev-public"
+            "value": "Vnet_databricks_dmp_dev-public"
         },
         "dataLakeStorageAccountName": {
-            "value": "dmp5766devdlstrg1"
+            "value": "Databricks_ws_storage"
         },
         "existingVirtualNetworkSubnets": {
             "value": [
-                "krcdp_databricks_dmp_dev-public"
+                "Vnet_databricks_dmp_dev-public"
             ]
         },
         "setStorageAccountVnetFirewallrules": {
@@ -68,7 +68,7 @@
             "value": "Allow"
         },
         "keyVaultName": {
-            "value": "dmp-5766-dev-kv1"
+            "value": "Databricks_ws_keyVault"
         },
         "usertenantId": {
             "value": "8331e14a-9134-4288-bf5a-5e2c8412f074"
