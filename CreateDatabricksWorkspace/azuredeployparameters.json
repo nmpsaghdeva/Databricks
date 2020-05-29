@@ -68,7 +68,7 @@
             "value": "Allow"
         },
         "keyVaultName": {
-            "value": "Databricks_ws_keyVault"
+            "value": "databrickswskeyvault"
         },
 
         "usertenantId": {
