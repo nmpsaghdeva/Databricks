@@ -70,11 +70,12 @@
         "keyVaultName": {
             "value": "Databricks_ws_keyVault"
         },
+
         "usertenantId": {
-            "value": "8331e14a-9134-4288-bf5a-5e2c8412f074"
+            "value": "f951672e-2fae-4e7f-8f7a-6f46c07e0a43"
         },
         "userobjectId": {
-            "value": "6c2fc3fa-6b2a-4750-8321-6967e77b1eb8"
+            "value": "7a7893d4-7a04-49c0-8fa9-4af9c73b4d51"
         },
         "tags_databricks" : {
             "value": {
