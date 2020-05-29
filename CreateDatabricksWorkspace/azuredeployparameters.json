@@ -21,7 +21,7 @@
             "value": "Vnet_databricks_dmp_dev-public"
         },
         "dataLakeStorageAccountName": {
-            "value": "Databricks_ws_storage"
+            "value": "databrickswsstorage"
         },
         "existingVirtualNetworkSubnets": {
             "value": [
