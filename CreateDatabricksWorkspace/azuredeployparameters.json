@@ -12,7 +12,7 @@
             "value": "Central us"
         },
         "vnetName": {
-            "value": "Virtual_network_new"
+            "value": "Virtual_network"
         },
         "privateSubnetName": {
             "value": "Vnet_databricks_dmp_dev-private"
