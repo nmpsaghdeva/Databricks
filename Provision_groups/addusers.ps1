@@ -1,6 +1,15 @@
-param([string] $applicationName = "Testapp")
-$sp = Get-AzureADServicePrincipal -SearchString $applicationName
-$File = Import-Csv -Delimiter "," .\data.csv
+#########################################################################################################
+# Purpose  : This script is used to add Users and groups to anenterprise application                    #
+#                                                                                                       # 
+# Parameters : It takes 2 parameters                                                                    #
+#		1. Service principal object id of the application 					#
+#		2. path where data file kept with details of users and groups to be added		#
+#########################################################################################################
+
+param([string] $serviceprincipal,
+      [string] $path)
+$sp = Get-AzureADServicePrincipal -ObjectId $serviceprincipal
+$File = Import-Csv -Delimiter "," $path\data.csv
 $File | ForEach-Object {
         $ObjectName = $_.ObjectName
         $ObjectType = $_.ObjectType
