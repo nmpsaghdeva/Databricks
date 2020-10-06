@@ -33,8 +33,8 @@ secret_name=$3
 #pwd=$5
 #tenant_id=$6
 
-az login --username ApplicationCreator@nmpsaghdevagmail.onmicrosoft.com  --password Harshit13$
-echo "User is ==> ApplicationCreator@nmpsaghdevagmail.onmicrosoft.com"
+#az login --username ApplicationCreator@nmpsaghdevagmail.onmicrosoft.com  --password Harshit13$
+#echo "User is ==> ApplicationCreator@nmpsaghdevagmail.onmicrosoft.com"
 
 string=`az keyvault secret show --name $secret_name --vault-name $key_vault | jq '.contentType'`
 secretToken=`az keyvault secret show --name $secret_name --vault-name $key_vault | jq '.value'`
