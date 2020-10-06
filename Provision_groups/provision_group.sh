@@ -48,7 +48,7 @@ tenant_id=`az account show | jq '.tenantId' | sed s'/\"//g'`
 app_id=`az ad sp show --id ${spid} | jq '.appId' | sed s'/\"//g'`
 echo "Application Id ==>" $app_id
 
-#az login --username $user --password $pwd
+az login --username ApplicationCreator@nmpsaghdevagmail.onmicrosoft.com  --password Harshit13$
 #az login --service-principal --username APP_ID --password PASSWORD --tenant TENANT_ID
 #az login --service-principal --username ${app_id} --password ${pwd} --tenant ${tenant_id}
 response=$(az account get-access-token --resource-type ms-graph)
