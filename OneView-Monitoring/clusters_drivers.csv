@@ -1,0 +1,2 @@
+host_name,cluster_id,driver_pubilc_dns,driver_node_id,driver_instance_id,driver_start_timestamp,driver_host_private_ip,driver_private_ip
+adb-1515192762105108.8.azuredatabricks.net,1009-165658-sunup294,52.242.75.143,78299cf95d8a42aaaf398d46e260ef88,54b3007154864f4881075a8ddc81b5b8,09-Oct-20 17:00:26,192.168.21.11,192.168.20.11

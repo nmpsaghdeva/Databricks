@@ -1,0 +1,16 @@
+host_name,token_id,creation_time,expiry_time,comment,created_by_id,created_by_username
+adb-2229882759465707.7.azuredatabricks.net,57ce8c83da30fbff0dc023441e6cec9efb0146a262bfb9e185dc9f1a3b25ec40,Fri Sep 25 04:36:22 UTC 2020,Thu Dec 24 04:36:22 UTC 2020,dbfs,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,be61ede6aa3941f50207354952617867cf57918af12d18eca04f26aea596da4b,Wed Aug 26 15:03:22 UTC 2020,Tue Nov 24 15:03:22 UTC 2020,devops token,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,de5ab5882433e8db2fcbe3131df7327ee6a2d07582af8b4af17816c8628b07e4,Wed Aug 12 21:21:15 UTC 2020,Tue Nov 10 21:21:15 UTC 2020,keyvault,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,eabba5f3f5b7b4f7477b53e19cf10c1bfa8cf51cb3c6d09e556f58693f64afcf,Tue Aug 11 16:48:51 UTC 2020,Mon Nov  9 16:48:51 UTC 2020,dbfs,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,3e13c7c29956b5ab98a84e89235cad872873b9f1ca135c9d55a3e6b964fcfbf8,Fri Aug  7 05:03:11 UTC 2020,Thu Nov  5 05:03:11 UTC 2020,dbfs,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,eb4187901a52a3bab823a8f872bc39d769230dfe04c1154cab188f428c7fd869,Thu Aug  6 15:21:22 UTC 2020,Wed Nov  4 15:21:22 UTC 2020,dbfs access,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,2b603a4f17d013a65c89b9433d1b6201e9e7e22cab66f8b6c224f05a83ac4142,Mon Jul 27 16:47:35 UTC 2020,Sun Oct 25 16:47:35 UTC 2020,logic-app,6526237771927060,manoj.muppidi@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,a32a4715a264605296d3e75bf3a64aa32727d245955ba5968a6c76a2fd3eee62,Fri Oct  9 14:22:37 UTC 2020,Thu Jan  7 14:22:37 UTC 2021,odbc2,6803058400427195,naresh.sachdeva@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,6e0a885f996bed9dce5d4ccfcd8139d8dd47266cb9da28aa6340f730999b065c,Wed Oct  7 11:14:48 UTC 2020,Tue Jan  5 11:14:48 UTC 2021,Token-api,6803058400427195,naresh.sachdeva@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,082598f0dfcbdc2e9c303c1cd37dffce004895dd300c82288868e7c918ac605e,Mon Oct  5 10:54:44 UTC 2020,Sun Jan  3 10:54:44 UTC 2021,secretscope,6803058400427195,naresh.sachdeva@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,1bf11c92d0c670183a11b7c6c71525d71a10baafddf7e475bf197dfb3ff11bf7,Thu Sep  3 07:05:22 UTC 2020,Wed Dec  2 07:05:22 UTC 2020,ODBC,6803058400427195,naresh.sachdeva@kroger.com
+adb-2229882759465707.7.azuredatabricks.net,c671037e71e58cba68db60af94ab8d5c9f42373ccdf067ab3f30691e499392a9,Mon Aug 10 12:55:34 UTC 2020,Sun Nov  8 12:55:34 UTC 2020,ext-meta,6803058400427195,naresh.sachdeva@kroger.com
+adb-1515192762105108.8.azuredatabricks.net,8c3f178e2c416e885eb3c37367b4c07a48b5d9cf8fe6a6c3acd3eee8b0e7e9e3,Thu Oct  8 14:15:09 UTC 2020,Wed Jan  6 14:15:09 UTC 2021,Token Api,6526237771927060,manoj.muppidi@kroger.com
+adb-1515192762105108.8.azuredatabricks.net,3908973d17f5acd332562bbc9a05b9838ddad7b0b4066a6e8076a1c09465721e,Thu Oct  1 18:54:31 UTC 2020,Wed Dec 31 23:59:59 UTC 1969,devops,6526237771927060,manoj.muppidi@kroger.com
+adb-1515192762105108.8.azuredatabricks.net,e085554be2d321236bab97e8387c67bed51d05e3742a42d0df0324acb7692246,Thu Oct  8 11:19:43 UTC 2020,Wed Jan  6 11:19:43 UTC 2021,scope,6803058400427195,naresh.sachdeva@kroger.com
