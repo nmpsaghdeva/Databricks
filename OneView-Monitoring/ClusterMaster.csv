@@ -1,0 +1,25 @@
+Cluster ShortName,Host Name ,Environment 
+ce-abacus-dev-dbxws,adb-3902891022322542.2.azuredatabricks.net,Development
+ce-castula-dev-dbxws,adb-8577846838396699.19.azuredatabricks.net,Development
+ce-castula-test-dbxws,adb-4403343641583734.14.azuredatabricks.net,Test
+dmp-dq-dev-dbxws,adb-3499829563750973.13.azuredatabricks.net,Development
+dmp-orion-dev-dbxws,adb-1874195334288674.14.azuredatabricks.net,Development
+dmp-orion-test-dbxws,adb-5608539590875103.3.azuredatabricks.net,Test
+ds-vega-dev-dbxws,adb-4051079313992039.19.azuredatabricks.net,Development
+ds-vega-test-dbxws,adb-8762500652766487.7.azuredatabricks.net,Test
+merch-mira-dev-dbxws,adb-8427619959007309.9.azuredatabricks.net,Development
+merch-mira-test-dbxws,adb-8110389300225166.6.azuredatabricks.net,Test
+sc-aip-dev-dbxws,adb-7937550700624670.10.azuredatabricks.net,Development
+sc-instk-dev-dbxws,adb-136777335132330.10.azuredatabricks.net,Development
+sc-instock-test-dbxws,adb-1960926076420594.14.azuredatabricks.net,Test
+ce-abacus-prod-dbxws,adb-410451115857407.7.azuredatabricks.net,Production
+ce-castula-prod-dbxws,adb-3879256451428073.13.azuredatabricks.net,Production
+ce-castula-stage-dbxws,adb-289780018514837.17.azuredatabricks.net,Stage
+dmp-orion-prod-dbxws,adb-6623095077110487.7.azuredatabricks.net,Production
+dmp-orion-stage-dbxws,adb-6316141413613285.5.azuredatabricks.net,Stage
+ds-vega-prod-dbxws,adb-328119340439727.7.azuredatabricks.net,Production
+ds-vega-stage-dbxws,adb-6127354670988099.19.azuredatabricks.net,Stage
+merch-mira-prod-dbxws,adb-3600331667950561.1.azuredatabricks.net,Production
+merch-mira-stage-dbxws,adb-7880438648115054.14.azuredatabricks.net,Stage
+sc-instock-prod-dbxws,adb-1891235614837064.4.azuredatabricks.net,Production
+sc-instock-stage-dbxws,adb-30720978408851.11.azuredatabricks.net,Stage
